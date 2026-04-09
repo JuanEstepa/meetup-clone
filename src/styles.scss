@@ -1,4 +1,4 @@
-@import "primeicons/primeicons.css";
+@import 'primeicons/primeicons.css';
 
 @tailwind base;
 @tailwind components;
@@ -6,4 +6,82 @@
 
 body {
   background-color: #fafafa;
+}
+
+// Toast personalizado
+.p-toast {
+  .p-toast-message {
+    border-radius: 16px !important;
+    backdrop-filter: none !important;
+    opacity: 1 !important;
+
+    &.p-toast-message-success {
+      background-color: #1a1a1a !important;
+      border: none !important;
+      color: white !important;
+
+      .p-toast-message-icon,
+      .p-toast-summary,
+      .p-toast-detail {
+        color: white !important;
+      }
+
+      .p-toast-icon-close {
+        color: rgba(255, 255, 255, 0.6) !important;
+        &:hover {
+          color: white !important;
+        }
+      }
+
+      // Ícono verde de check
+      .p-toast-message-icon {
+        color: #4ade80 !important;
+      }
+    }
+
+    &.p-toast-message-error {
+      background-color: #232326 !important;
+      border: none !important;
+      color: white !important;
+
+      .p-toast-message-icon {
+        color: #ff4a79 !important;
+      }
+      .p-toast-summary,
+      .p-toast-detail,
+      .p-toast-icon-close {
+        color: white !important;
+      }
+    }
+
+    &.p-toast-message-info {
+      background-color: #232326 !important;
+      border: none !important;
+      color: white !important;
+
+      .p-toast-message-icon {
+        color: #634fb8 !important;
+      }
+      .p-toast-summary,
+      .p-toast-detail,
+      .p-toast-icon-close {
+        color: white !important;
+      }
+    }
+
+    &.p-toast-message-warn {
+      background-color: #232326 !important;
+      border: none !important;
+      color: white !important;
+
+      .p-toast-message-icon {
+        color: #ffb06d !important;
+      }
+      .p-toast-summary,
+      .p-toast-detail,
+      .p-toast-icon-close {
+        color: white !important;
+      }
+    }
+  }
 }
