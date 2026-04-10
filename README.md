@@ -6,7 +6,7 @@ Clon de la plataforma [Meetup](https://www.meetup.com/) desarrollado como prueba
 
 ## Diseño
 
-[Ver mockup en Figma](#) <!-- Reemplaza con el link real -->
+[Ver mockup en Figma](https://www.figma.com/design/OQOuVY1MvFKNWPf4qiZNqa/Meetup-clon?node-id=0-1&t=OmsZ3bvBZLCKOOGw-1)
 
 ---
 
