@@ -1,5 +1,5 @@
-<nav class="w-full pt-4 sticky top-0 z-50">
-  <div class=" px-4 md:px-20 h-16 flex items-center justify-between gap-4">
+<nav class="w-full bg-white/50 py-4 backdrop-blur-xl sticky top-0 z-50">
+  <div class="px-4 md:px-20 h-16 flex items-center justify-between gap-4">
     <!-- Logo -->
     <a routerLink="/" class="flex-shrink-0 text-[#FF4A79]">
       <svg
@@ -75,31 +75,30 @@
     </div>
 
     <!-- Acciones -->
-    <div class="flex items-center gap-2 flex-shrink-0">
+    <div class="flex items-center gap-4 flex-shrink-0">
       <!-- No logueado -->
       @if (!authService.isAuthenticated()) {
-        <!-- Desktop: Iniciar sesión + Registrarse -->
-        <a
-          routerLink="/login"
+        <button
           class="hidden md:block text-sm font-medium text-[#232326] hover:text-gray-600 transition-colors"
+          (click)="authModalService.openLogin()"
         >
           Iniciar sesión
-        </a>
-        <a
-          routerLink="/login"
+        </button>
+        <button
           class="hidden md:block bg-[#232326] text-white text-sm font-semibold px-5 py-2 rounded-full hover:bg-gray-800 transition-colors"
+          (click)="authModalService.openRegister()"
         >
           Registrarse
-        </a>
+        </button>
 
-        <!-- Mobile: solo Iniciar sesión -->
-        <a
-          routerLink="/login"
+        <!-- Mobile -->
+        <button
           class="md:hidden bg-[#232326] text-white text-sm font-semibold px-5 rounded-full flex items-center"
           style="min-height: 44px"
+          (click)="authModalService.openLogin()"
         >
           Iniciar sesión
-        </a>
+        </button>
       }
 
       <!-- Logueado -->
