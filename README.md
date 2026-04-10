@@ -65,13 +65,13 @@ chore: add prettier configuration
 
 ---
 
-## 📱 Mobile First
+## Mobile First
 
 El diseño prioriza la experiencia móvil. Todos los componentes se construyeron partiendo de breakpoints pequeños y escalando hacia desktop, usando las utilidades responsive de Tailwind (`sm:`, `md:`, `lg:`).
 
 ---
 
-## ⚙️ Instalación y uso local
+## Instalación y uso local
 
 ```bash
 # Clonar el repositorio
@@ -90,6 +90,9 @@ Abre [http://localhost:4200](http://localhost:4200) en tu navegador.
 ### Credenciales de prueba
 
 Para acceder al dashboard de usuario puedes usar cualquier usuario y contraseña:
+
+- **Usuario:** admin@example.com
+- **Contraseña:** admin123
 
 ---
 
