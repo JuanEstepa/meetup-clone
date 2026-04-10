@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { EventCard } from '../../shared/components/event-card/event-card';
 import { EventsService } from '../../core/services/events.service';
 import { ScrollContainer } from '../../shared/components/scroll-container/scroll-container';
+import { AuthModalService } from '../../core/services/auth-modal.service';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,7 @@ import { ScrollContainer } from '../../shared/components/scroll-container/scroll
 })
 export class Home {
   eventsService = inject(EventsService);
+  authModalService = inject(AuthModalService);
   @ViewChild('categoriesScroll') categoriesScroll!: ElementRef;
 
   showScrollLeft = false;
@@ -38,28 +40,28 @@ export class Home {
       bg: '#f5f3ff',
     },
     {
+      name: 'Juegos',
+      image: 'https://secure.meetupstatic.com/next/images/complex-icons/branded/videogame.webp',
+      border: '#38BDF8',
+      bg: '#f0f9ff',
+    },
+    {
       name: 'Tecnología',
       image: 'https://secure.meetupstatic.com/next/images/complex-icons/branded/computer.webp',
-      border: '#60C4E8',
-      bg: '#f0faff',
+      border: '#F4A46A',
+      bg: '#fff7f0',
     },
     {
       name: 'Arte y Cultura',
       image: 'https://secure.meetupstatic.com/next/images/complex-icons/branded/painting.webp',
-      border: '#F472B6',
-      bg: '#fdf2f8',
+      border: '#6DD5A8',
+      bg: '#f0fdf8',
     },
     {
       name: 'Salud y Bienestar',
       image: 'https://secure.meetupstatic.com/next/images/complex-icons/branded/mental-health.webp',
-      border: '#34D399',
-      bg: '#f0fdf4',
-    },
-    {
-      name: 'Juegos',
-      image: 'https://secure.meetupstatic.com/next/images/complex-icons/branded/videogame.webp',
-      border: '#818CF8',
-      bg: '#eef2ff',
+      border: '#A78BFA',
+      bg: '#f5f3ff',
     },
     {
       name: 'Ciencia y Educación',

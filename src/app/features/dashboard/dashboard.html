@@ -1,16 +1,13 @@
-<p>dashboard works!</p>
 <div class="min-h-screen bg-[#fafafa]">
-  <div class="max-w-[1280px] mx-auto px-4 md:px-20 py-8">
+  <div class="max-w-[1280px] mx-auto px-4 md:px-20 py-2 md:py-8">
     <div class="flex gap-8">
-
       <!-- ========== SIDEBAR IZQUIERDA (sticky desktop) ========== -->
       <aside class="hidden md:flex flex-col gap-4 w-80 flex-shrink-0">
         <div class="sticky top-24 flex flex-col gap-4">
-
           <!-- Perfil -->
           <div
             class="bg-white rounded-2xl p-4 flex items-center justify-between cursor-pointer hover:shadow-md transition-shadow"
-            style="box-shadow: 0px 2px 8px rgba(0,0,0,0.08);"
+            style="box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08)"
             routerLink="/dashboard"
           >
             <div class="flex items-center gap-3">
@@ -32,10 +29,7 @@
           </div>
 
           <!-- Confirmado / Guardado -->
-          <div
-            class="bg-white rounded-2xl p-4"
-            style="box-shadow: 0px 2px 8px rgba(0,0,0,0.08);"
-          >
+          <div class="bg-white rounded-2xl p-4" style="box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08)">
             <!-- Tabs -->
             <div class="flex items-center justify-between mb-4">
               <div class="flex gap-4">
@@ -67,7 +61,10 @@
 
             <!-- Lista eventos -->
             <div class="flex flex-col gap-3">
-              @for (event of (activeTab() === 'confirmado' ? confirmedEvents() : savedEvents()); track event.id) {
+              @for (
+                event of activeTab() === 'confirmado' ? confirmedEvents() : savedEvents();
+                track event.id
+              ) {
                 <div
                   class="flex items-center gap-3 cursor-pointer hover:bg-gray-50 rounded-xl p-2 transition-colors"
                   [routerLink]="['/event', event.id]"
@@ -81,9 +78,7 @@
                     <p class="font-semibold text-[#232326] text-sm line-clamp-2 leading-tight">
                       {{ event.title }}
                     </p>
-                    <p class="text-xs text-gray-500 mt-1">
-                      {{ event.date }} • {{ event.time }}
-                    </p>
+                    <p class="text-xs text-gray-500 mt-1">{{ event.date }} • {{ event.time }}</p>
                   </div>
                 </div>
               }
@@ -91,10 +86,7 @@
           </div>
 
           <!-- Tus Grupos -->
-          <div
-            class="bg-white rounded-2xl p-4"
-            style="box-shadow: 0px 2px 8px rgba(0,0,0,0.08);"
-          >
+          <div class="bg-white rounded-2xl p-4" style="box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08)">
             <div class="flex items-center justify-between mb-4">
               <h3 class="font-bold text-[#232326] text-sm">
                 Tus Grupos
@@ -107,7 +99,9 @@
 
             <div class="flex flex-col gap-3">
               @for (group of groups(); track group; let i = $index) {
-                <div class="flex items-center gap-3 cursor-pointer hover:bg-gray-50 rounded-xl p-2 transition-colors">
+                <div
+                  class="flex items-center gap-3 cursor-pointer hover:bg-gray-50 rounded-xl p-2 transition-colors"
+                >
                   <img
                     [src]="groupImages[i] || groupImages[0]"
                     [alt]="group"
@@ -120,17 +114,15 @@
               }
             </div>
           </div>
-
         </div>
       </aside>
 
       <!-- ========== CONTENIDO PRINCIPAL ========== -->
       <main class="flex-1 min-w-0 flex flex-col gap-8">
-
         <!-- ===== MOBILE: Perfil arriba ===== -->
         <div
           class="md:hidden bg-white rounded-2xl p-4 flex items-center justify-between"
-          style="box-shadow: 0px 2px 8px rgba(0,0,0,0.08);"
+          style="box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08)"
         >
           <div class="flex items-center gap-3">
             <img
@@ -178,13 +170,27 @@
           </div>
 
           <!-- Scroll horizontal cards -->
-          <div class="flex gap-4 overflow-x-auto pb-2" style="scrollbar-width: none;">
-            @for (event of (activeTab() === 'confirmado' ? confirmedEvents() : savedEvents()); track event.id) {
+          <div class="flex gap-4 overflow-x-auto pb-2" style="scrollbar-width: none">
+            @for (
+              event of activeTab() === 'confirmado' ? confirmedEvents() : savedEvents();
+              track event.id
+            ) {
               <div
-                class="flex-shrink-0 w-72"
+                class="flex-shrink-0 w-56 bg-white rounded-2xl overflow-hidden cursor-pointer p-3 flex items-center gap-2"
+                style="box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08)"
                 [routerLink]="['/event', event.id]"
               >
-                <app-event-card [event]="event" />
+                <img
+                  [src]="event.image"
+                  [alt]="event.title"
+                  class="w-18 h-14 rounded-xl object-cover flex-shrink-0"
+                />
+                <div class="flex-1 min-w-0">
+                  <p class="font-semibold text-[#232326] text-sm line-clamp-2 leading-tight">
+                    {{ event.title }}
+                  </p>
+                  <p class="text-xs text-gray-500 mt-1">{{ event.date }} • {{ event.time }}</p>
+                </div>
               </div>
             }
           </div>
@@ -199,23 +205,23 @@
             </h3>
             <a routerLink="/" class="text-xs text-[#634FB8] font-semibold">Ver todo</a>
           </div>
-          <app-scroll-container>
+          <div class="flex gap-4 overflow-x-auto pb-2" style="scrollbar-width: none">
             @for (group of groups(); track group; let i = $index) {
               <div
-                class="flex-shrink-0 w-48 bg-white rounded-2xl overflow-hidden cursor-pointer"
-                style="box-shadow: 0px 2px 8px rgba(0,0,0,0.08);"
+                class="flex-shrink-0 w-48 bg-white rounded-2xl overflow-hidden cursor-pointer p-3"
+                style="box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08)"
               >
                 <img
                   [src]="groupImages[i] || groupImages[0]"
                   [alt]="group"
-                  class="w-full h-24 object-cover"
+                  class="w-full h-24 object-cover rounded-xl mb-3"
                 />
-                <p class="font-semibold text-[#232326] text-sm p-3 leading-tight">
+                <p class="font-semibold text-[#232326] text-sm leading-tight">
                   {{ group }}
                 </p>
               </div>
             }
-          </app-scroll-container>
+          </div>
         </div>
 
         <!-- ===== PARA TI ===== -->
@@ -230,19 +236,32 @@
                 <i class="pi pi-pencil text-sm"></i>
               </button>
             </h2>
-            <a routerLink="/" class="text-sm text-[#634FB8] font-semibold hover:underline hidden md:block">
+            <a
+              routerLink="/"
+              class="text-sm text-[#634FB8] font-semibold hover:underline hidden md:block"
+            >
               Ver más
             </a>
           </div>
 
           <!-- Scroll horizontal -->
-          <app-scroll-container>
-            @for (event of recommendedEvents(); track event.id) {
-              <div class="flex-shrink-0 w-72">
-                <app-event-card [event]="event" />
-              </div>
-            }
-          </app-scroll-container>
+          @if (isMobile$ | async) {
+            <div class="flex gap-4 overflow-x-auto pb-2" style="scrollbar-width: none">
+              @for (event of recommendedEvents(); track event.id) {
+                <div class="flex-shrink-0 w-80">
+                  <app-event-card [event]="event" />
+                </div>
+              }
+            </div>
+          } @else {
+            <app-scroll-container>
+              @for (event of recommendedEvents(); track event.id) {
+                <div class="flex-shrink-0 w-72">
+                  <app-event-card [event]="event" />
+                </div>
+              }
+            </app-scroll-container>
+          }
         </div>
 
         <!-- ===== DE TUS GRUPOS ===== -->
@@ -257,7 +276,7 @@
           <!-- Lista vertical -->
           <div
             class="bg-white rounded-2xl overflow-hidden"
-            style="box-shadow: 0px 2px 8px rgba(0,0,0,0.08);"
+            style="box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08)"
           >
             @for (event of groupEvents(); track event.id; let last = $last) {
               <div
@@ -275,25 +294,35 @@
                   <p class="font-bold text-[#232326] text-sm line-clamp-2 leading-tight mb-1">
                     {{ event.title }}
                   </p>
-                  <p class="text-xs text-gray-500 mb-1">
-                    {{ event.date }} • {{ event.time }}
-                  </p>
-                  <p class="text-xs text-gray-400">
-                    Por {{ event.organizer }}
-                  </p>
+                  <p class="text-xs text-gray-500 mb-1">{{ event.date }} • {{ event.time }}</p>
+                  <p class="text-xs text-gray-400">Por {{ event.organizer }}</p>
                   <div class="flex items-center gap-1 mt-1">
                     <div class="flex -space-x-2">
-                      <img src="https://i.pravatar.cc/24?img=1" class="w-5 h-5 rounded-full border border-white" alt=""/>
-                      <img src="https://i.pravatar.cc/24?img=2" class="w-5 h-5 rounded-full border border-white" alt=""/>
+                      <img
+                        src="https://i.pravatar.cc/24?img=1"
+                        class="w-5 h-5 rounded-full border border-white"
+                        alt=""
+                      />
+                      <img
+                        src="https://i.pravatar.cc/24?img=2"
+                        class="w-5 h-5 rounded-full border border-white"
+                        alt=""
+                      />
                     </div>
                     <span class="text-xs text-gray-400 ml-1">{{ event.attendees }} Asistentes</span>
                   </div>
                 </div>
                 <div class="flex flex-col gap-2 flex-shrink-0">
-                  <button class="text-gray-400 hover:text-[#232326] transition-colors" (click)="$event.stopPropagation()">
+                  <button
+                    class="text-gray-400 hover:text-[#232326] transition-colors"
+                    (click)="$event.stopPropagation()"
+                  >
                     <i class="pi pi-share-alt text-sm"></i>
                   </button>
-                  <button class="text-gray-400 hover:text-[#232326] transition-colors" (click)="$event.stopPropagation()">
+                  <button
+                    class="text-gray-400 hover:text-[#232326] transition-colors"
+                    (click)="$event.stopPropagation()"
+                  >
                     <i class="pi pi-bookmark text-sm"></i>
                   </button>
                 </div>
@@ -301,7 +330,6 @@
             }
           </div>
         </div>
-
       </main>
     </div>
   </div>

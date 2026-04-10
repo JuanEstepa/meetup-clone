@@ -1,1 +1,381 @@
-<p>event-detail works!</p>
+@if (event()) {
+  <div class="bg-[#fafafa]">
+    <div class="max-w-[1280px] mx-auto px-4 md:px-20 py-8">
+      <div class="flex flex-col md:flex-row gap-8 md:items-start">
+        <!-- ===== COLUMNA IZQUIERDA ===== -->
+        <div class="flex-1 min-w-0 flex flex-col gap-6">
+          <!-- Título -->
+          <h1 class="text-2xl md:text-3xl font-black text-[#232326] leading-tight">
+            {{ event()!.title }}
+          </h1>
+
+          <!-- Imagen — mobile -->
+          <div class="md:hidden rounded-2xl overflow-hidden">
+            <img
+              [src]="event()!.image"
+              [alt]="event()!.title"
+              class="w-full object-cover"
+              style="max-height: 260px"
+            />
+          </div>
+
+          <!-- Info básica — mobile -->
+          <div
+            class="md:hidden bg-white rounded-2xl p-4 flex flex-col gap-3"
+            style="box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08)"
+          >
+            <div class="flex items-center gap-3">
+              <img
+                src="https://i.pravatar.cc/32?img=11"
+                class="w-8 h-8 rounded-full object-cover"
+                alt="organizador"
+              />
+              <p class="text-sm text-[#232326]">
+                Organizado por <span class="font-bold">Andrew</span> y 2 más
+              </p>
+            </div>
+            <div class="flex items-center gap-3">
+              <img
+                src="https://secure.meetupstatic.com/next/images/complex-icons/branded/calendar.webp?w=64"
+                class="w-6 h-6 object-contain"
+                alt="fecha"
+              />
+              <p class="text-sm text-[#232326]">{{ event()!.date }} • {{ event()!.time }}</p>
+            </div>
+            <div class="flex items-center gap-3">
+              @if (event()!.isOnline) {
+                <img
+                  src="https://secure.meetupstatic.com/next/images/complex-icons/branded/video.webp?w=64"
+                  class="w-6 h-6 object-contain"
+                  alt="online"
+                />
+                <p class="text-sm text-[#232326]">Evento en Línea</p>
+              } @else {
+                <img
+                  src="https://secure.meetupstatic.com/next/images/complex-icons/branded/pin.webp?w=64"
+                  class="w-6 h-6 object-contain"
+                  alt="ubicacion"
+                />
+                <p class="text-sm text-[#232326]">{{ event()!.location }}</p>
+              }
+            </div>
+          </div>
+
+          <!-- Compartir — mobile -->
+          <button
+            class="md:hidden w-full flex items-center justify-center gap-2 bg-white border border-gray-200 rounded-full text-sm font-semibold text-[#232326] hover:bg-gray-50 transition-colors"
+            style="min-height: 44px; box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.06)"
+            (click)="openShare($event)"
+          >
+            <i class="pi pi-share-alt"></i>
+            Compartir evento
+          </button>
+
+          <!-- Detalles / Descripción -->
+          <div>
+            <h2 class="font-black text-[#232326] text-lg mb-1">Detalles</h2>
+            <div class="w-8 h-1 bg-[#FF4A79] rounded-full mb-4"></div>
+
+            <p class="text-sm text-[#232326] leading-relaxed whitespace-pre-line">
+              {{ truncatedDescription() }}
+            </p>
+
+            @if (isDescriptionLong()) {
+              <button
+                class="text-[#634FB8] font-bold text-sm mt-3 hover:underline"
+                (click)="toggleDescription()"
+              >
+                {{ descriptionExpanded() ? 'Ver menos' : 'Leer más' }}
+              </button>
+            }
+          </div>
+
+          <!-- Asistentes -->
+          <div>
+            <div class="flex items-center gap-3 mb-6">
+              <h2 class="font-black text-[#232326] text-lg">Asistentes</h2>
+              <span class="bg-gray-100 text-[#232326] text-sm font-bold px-3 py-1 rounded-full">
+                {{ event()!.attendees }}
+              </span>
+            </div>
+
+            <div class="grid grid-cols-3 md:grid-cols-4 gap-3">
+              <!-- Andrew — organizador -->
+              <div
+                class="bg-white rounded-2xl p-5 flex flex-col items-center text-center gap-2"
+                style="box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08)"
+              >
+                <img
+                  src="https://i.pravatar.cc/80?img=11"
+                  alt="Andrew"
+                  class="w-20 h-20 rounded-full object-cover"
+                />
+                <div>
+                  <p class="font-bold text-[#232326] text-md">Andrew</p>
+                  <p class="text-sm text-gray-500">Super organizador</p>
+                </div>
+              </div>
+
+              <!-- Paul 1 -->
+              <div
+                class="bg-white rounded-2xl p-5 flex flex-col items-center text-center gap-2"
+                style="box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08)"
+              >
+                <img
+                  src="https://i.pravatar.cc/80?img=12"
+                  alt="Paul"
+                  class="w-20 h-20 rounded-full object-cover"
+                />
+                <div>
+                  <p class="font-bold text-[#232326] text-md">Paul R.</p>
+                  <p class="text-sm text-gray-500">Miembro</p>
+                </div>
+              </div>
+
+              <!-- Paul 2 — solo desktop -->
+              <div
+                class="hidden md:flex bg-white rounded-2xl p-5 flex-col items-center text-center gap-2"
+                style="box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08)"
+              >
+                <img
+                  src="https://i.pravatar.cc/80?img=13"
+                  alt="Paul"
+                  class="w-20 h-20 rounded-full object-cover"
+                />
+                <div>
+                  <p class="font-bold text-[#232326] text-md">Paul R.</p>
+                  <p class="text-sm text-gray-500">Miembro</p>
+                </div>
+              </div>
+
+              <!-- +99 -->
+              <div
+                class="bg-white rounded-2xl p-5 flex flex-col items-center text-center gap-2"
+                style="box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08)"
+              >
+                <div class="relative w-20 h-20">
+                  <img
+                    src="https://i.pravatar.cc/40?img=14"
+                    class="absolute top-0 left-0 w-10 h-10 rounded-full border-2 blur-sm border-white object-cover"
+                    alt=""
+                  />
+                  <img
+                    src="https://i.pravatar.cc/40?img=15"
+                    class="absolute top-0 right-0 w-10 h-10 rounded-full border-2 blur-sm border-white object-cover"
+                    alt=""
+                  />
+                  <img
+                    src="https://i.pravatar.cc/40?img=16"
+                    class="absolute bottom-0 left-0 w-10 h-10 rounded-full border-2 blur-sm border-white object-cover"
+                    alt=""
+                  />
+                  <div
+                    class="absolute bottom-0 right-0 w-10 h-10 rounded-full bg-[#FF4A79] flex items-center justify-center"
+                  >
+                    <span class="text-white text-[12px] font-bold">+99</span>
+                  </div>
+                </div>
+                <div>
+                  <p class="font-bold text-[#232326] text-md">+99 más</p>
+                  <p class="text-sm text-gray-500">200 en espera</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== COLUMNA DERECHA sticky desktop ===== -->
+        <aside class="hidden md:flex flex-col gap-4 w-[420px] flex-shrink-0">
+          <div class="sticky top-24 flex flex-col gap-4">
+            <!-- Imagen -->
+            <div
+              class="rounded-2xl overflow-hidden"
+              style="box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08)"
+            >
+              <img
+                [src]="event()!.image"
+                [alt]="event()!.title"
+                class="w-full object-cover"
+                style="max-height: 220px"
+              />
+            </div>
+
+            <!-- Info card -->
+            <div
+              class="bg-white rounded-2xl p-5 flex flex-col gap-4"
+              style="box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08)"
+            >
+              <!-- Organizador -->
+              <div class="flex items-center gap-3">
+                <img
+                  src="https://i.pravatar.cc/32?img=11"
+                  class="w-8 h-8 rounded-full object-cover"
+                  alt="organizador"
+                />
+                <p class="text-sm text-[#232326]">
+                  Organizado por <span class="font-bold">Andrew</span> y 2 más
+                </p>
+              </div>
+
+              <div class="border-t border-gray-100"></div>
+
+              <!-- Fecha -->
+              <div class="flex items-center gap-3">
+                <img
+                  src="https://secure.meetupstatic.com/next/images/complex-icons/branded/calendar.webp?w=64"
+                  class="w-7 h-7 object-contain"
+                  alt="fecha"
+                />
+                <p class="text-sm text-[#232326] font-medium">
+                  {{ event()!.date }} • {{ event()!.time }}
+                </p>
+              </div>
+
+              <div class="border-t border-gray-100"></div>
+
+              <!-- Ubicación -->
+              <div class="flex items-center gap-3">
+                @if (event()!.isOnline) {
+                  <img
+                    src="https://secure.meetupstatic.com/next/images/complex-icons/branded/video.webp?w=64"
+                    class="w-7 h-7 object-contain"
+                    alt="online"
+                  />
+                  <p class="text-sm text-[#232326] font-medium">Evento en Línea</p>
+                } @else {
+                  <img
+                    src="https://secure.meetupstatic.com/next/images/complex-icons/branded/pin.webp?w=64"
+                    class="w-7 h-7 object-contain"
+                    alt="ubicacion"
+                  />
+                  <p class="text-sm text-[#232326] font-medium">{{ event()!.location }}</p>
+                }
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <!-- BARRA STICKY BOTTOM -->
+    <div class="sticky bottom-4 z-50 px-4 md:px-20">
+      <div
+        class="bg-white rounded-full px-4 py-4 md:px-8 flex items-center gap-3"
+        style="box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.16)"
+      >
+        <div class="flex md:hidden items-center justify-between w-full gap-3">
+          <div class="flex flex-col">
+            <span class="font-black text-[#232326] text-base">
+              {{ eventsService.formatPrice(event()!.price) }}
+            </span>
+            <span class="text-xs text-[#FF4A79] font-semibold">2 Plazas restantes</span>
+          </div>
+          <button
+            class="bg-[#232326] text-white font-bold rounded-full flex items-center justify-center px-8 hover:bg-gray-800 active:scale-95 transition-all flex-1"
+            style="min-height: 48px"
+            (click)="joinEvent()"
+          >
+            Unirse al evento
+          </button>
+        </div>
+
+        <div class="hidden md:flex items-center justify-between w-full gap-8">
+          <div class="flex-1 min-w-0">
+            <p class="font-bold text-[#232326] text-lg truncate">
+              {{ event()!.title }}
+            </p>
+          </div>
+
+          <div class="flex flex-col border-l border-gray-100 pl-8">
+            <span class="font-black text-[#232326] text-base leading-tight">
+              {{ eventsService.formatPrice(event()!.price) }}
+            </span>
+            <span class="text-xs text-[#FF4A79] font-semibold"> 2 Plazas restantes </span>
+          </div>
+
+          <div class="flex items-center gap-3 flex-shrink-0">
+            <button
+              class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center hover:bg-gray-100 transition-colors"
+              (click)="saveEvent()"
+            >
+              <i class="pi pi-bookmark text-[#232326]"></i>
+            </button>
+            <button
+              class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center hover:bg-gray-100 transition-colors"
+              (click)="openShare($event)"
+            >
+              <i class="pi pi-share-alt text-[#232326]"></i>
+            </button>
+            <button
+              class="bg-[#232326] text-white font-bold rounded-full flex items-center justify-center px-8 hover:bg-gray-800 active:scale-95 transition-all ml-2"
+              style="min-height: 48px"
+              (click)="joinEvent()"
+            >
+              Unirse al evento
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal compartir -->
+  @if (showShareModal()) {
+    <div
+      class="fixed inset-0 z-[9999] flex items-end md:items-center justify-center"
+      (click)="closeShare()"
+    >
+      <div class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+      <div
+        class="relative bg-white rounded-t-2xl md:rounded-2xl p-6 w-full md:w-80 z-10"
+        style="box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.24)"
+        (click)="$event.stopPropagation()"
+      >
+        <div class="flex items-center justify-between mb-5">
+          <h4 class="font-bold text-[#232326] text-lg">Compartir evento</h4>
+          <button
+            class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors"
+            (click)="closeShare()"
+          >
+            <i class="pi pi-times text-sm text-[#232326]"></i>
+          </button>
+        </div>
+
+        <!-- WhatsApp -->
+        <button
+          class="w-full flex items-center gap-4 p-3 rounded-xl hover:bg-gray-50 transition-colors mb-2"
+          (click)="shareWhatsapp()"
+        >
+          <div
+            class="w-11 h-11 rounded-full bg-[#25D366] flex items-center justify-center flex-shrink-0"
+          >
+            <svg width="22" height="22" fill="white" viewBox="0 0 24 24">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
+              />
+            </svg>
+          </div>
+          <span class="font-semibold text-[#232326] text-base">WhatsApp</span>
+        </button>
+
+        <!-- Copiar link -->
+        <button
+          class="w-full flex items-center gap-4 p-3 rounded-xl hover:bg-gray-50 transition-colors"
+          (click)="copyLink()"
+        >
+          <div
+            class="w-11 h-11 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0"
+          >
+            <i class="pi pi-link text-[#232326] text-lg"></i>
+          </div>
+          <span class="font-semibold text-[#232326] text-base">Copiar enlace</span>
+        </button>
+      </div>
+    </div>
+  }
+} @else {
+  <div class="flex items-center justify-center min-h-screen">
+    <p class="text-gray-500">Evento no encontrado</p>
+  </div>
+}
+0.

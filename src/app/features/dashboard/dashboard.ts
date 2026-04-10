@@ -5,6 +5,8 @@ import { AuthService } from '../../core/services/auth.service';
 import { EventsService } from '../../core/services/events.service';
 import { EventCard } from '../../shared/components/event-card/event-card';
 import { ScrollContainer } from '../../shared/components/scroll-container/scroll-container';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,6 +17,7 @@ import { ScrollContainer } from '../../shared/components/scroll-container/scroll
 export class Dashboard {
   authService = inject(AuthService);
   eventsService = inject(EventsService);
+  private breakpointObserver = inject(BreakpointObserver);
 
   activeTab = signal<'confirmado' | 'guardado'>('confirmado');
 
@@ -32,4 +35,8 @@ export class Dashboard {
     'https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=800&auto=format&fit=crop',
     'https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=800&auto=format&fit=crop'
   ];
+
+  isMobile$ = this.breakpointObserver
+    .observe([Breakpoints.Handset, Breakpoints.TabletPortrait])
+    .pipe(map(result => result.matches));
 }
