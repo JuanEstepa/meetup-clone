@@ -1,59 +1,109 @@
-# MeetupClone
+# Meetup Clone
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.6.
+Clon de la plataforma [Meetup](https://www.meetup.com/) desarrollado como prueba técnica. Construido con Angular 21, PrimeNG y Tailwind CSS, con enfoque **mobile first**, buenas prácticas de UX y flujo de autenticación con JWT.
 
-## Development server
+---
 
-To start a local development server, run:
+## Diseño
 
-```bash
-ng serve
+[Ver mockup en Figma](#) <!-- Reemplaza con el link real -->
+
+---
+
+## Funcionalidades
+
+- **Home / Landing** — Exploración de eventos destacados y categorías
+- **Vista detalle de evento** — Información completa del evento: descripción, fecha, ubicación y asistentes
+- **Login / Auth** — Autenticación simulada con JWT almacenado en `localStorage`
+- **Dashboard de usuario** — Vista protegida accesible solo para usuarios autenticados, con guard de JWT
+
+---
+
+## Autenticación
+
+La autenticación se gestiona mediante un JWT simulado (sin backend), almacenado en `localStorage`. Las rutas protegidas utilizan un **Auth Guard** de Angular que verifica la existencia y validez del token antes de permitir el acceso.
+
+---
+
+## Stack Tecnológico
+
+| Tecnología | Versión | Uso |
+|---|---|---|
+| Angular | 21.2 | Framework principal |
+| PrimeNG | 21.1 | Componentes UI |
+| @primeng/themes | 21.0 | Sistema de temas |
+| Tailwind CSS | 3.4 | Estilos utilitarios |
+| TypeScript | 5.9 | Tipado estático |
+| Vitest | 4.0 | Testing unitario |
+| Prettier | 3.8 | Formato de código |
+
+---
+
+## Estructura del proyecto
+
+```
+src/
+├── app/
+│   ├── core/           # Guards, interceptors, servicios singleton
+│   ├── features/       # Módulos por vista (home, detail, auth, dashboard)
+│   ├── shared/         # Componentes y pipes reutilizables
+│   └── app.routes.ts   # Configuración de rutas
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## Commits
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Los commits siguen la convención **Conventional Commits**:
 
-```bash
-ng generate component component-name
+```
+feat: add JWT auth guard for protected routes
+feat: implement event detail view
+fix: correct mobile layout on home hero section
+chore: add prettier configuration
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
+
+## 📱 Mobile First
+
+El diseño prioriza la experiencia móvil. Todos los componentes se construyeron partiendo de breakpoints pequeños y escalando hacia desktop, usando las utilidades responsive de Tailwind (`sm:`, `md:`, `lg:`).
+
+---
+
+## ⚙️ Instalación y uso local
 
 ```bash
-ng generate --help
+# Clonar el repositorio
+git clone https://github.com/JuanEstepa/meetup-clone.git
+cd meetup-clone
+
+# Instalar dependencias
+npm install
+
+# Iniciar servidor de desarrollo
+npm start
 ```
 
-## Building
+Abre [http://localhost:4200](http://localhost:4200) en tu navegador.
 
-To build the project run:
+### Credenciales de prueba
+
+Para acceder al dashboard de usuario puedes usar cualquier usuario y contraseña:
+
+---
+
+## Build de producción
 
 ```bash
-ng build
+npm run build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Los artefactos se generan en la carpeta `dist/`.
 
-## Running unit tests
+---
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## 👤 Autor
 
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+**Juan Estepa**
+[GitHub](https://github.com/JuanEstepa)
