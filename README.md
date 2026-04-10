@@ -106,6 +106,10 @@ Los artefactos se generan en la carpeta `dist/`.
 
 ---
 
+## GitFlow
+
+Debido a la agilidad requerida para el desarrollo inicial del MVP y al ser un proyecto donde solo hay un desarrollador, se optó por un flujo directo sobre la rama main para asegurar una integración continua y despliegues rápidos en Vercel. Sin embargo, el proyecto está estructurado para escalar a un modelo de GitFlow con ramas feature/ y develop en entornos colaborativos.
+
 ## 👤 Autor
 
 **Juan Estepa**
