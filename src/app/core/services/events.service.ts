@@ -16,8 +16,9 @@ export class EventsService {
       image: 'https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=800',
       frequency: 'Mensualmente',
       location: 'Bogotá, CO',
-      description: 'Una noche épica de rock con las mejores bandas de la ciudad. Ven a disfrutar de música en vivo, conoce gente nueva y vive una experiencia inolvidable.',
-      isOnline: false
+      description:
+        'Una noche épica de rock con las mejores bandas de la ciudad. Ven a disfrutar de música en vivo, conoce gente nueva y vive una experiencia inolvidable.',
+      isOnline: false,
     },
     {
       id: '2',
@@ -31,8 +32,9 @@ export class EventsService {
       image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800',
       frequency: 'Cada Sab, Dom',
       location: 'Bogotá, CO',
-      description: 'Únete a nuestro club de lectura mensual donde exploramos diferentes géneros literarios y compartimos perspectivas únicas sobre cada obra.',
-      isOnline: false
+      description:
+        'Únete a nuestro club de lectura mensual donde exploramos diferentes géneros literarios y compartimos perspectivas únicas sobre cada obra.',
+      isOnline: false,
     },
     {
       id: '3',
@@ -46,8 +48,9 @@ export class EventsService {
       image: 'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=800',
       frequency: 'Mensualmente',
       location: 'Online',
-      description: 'Hands-on with the tool that\'s turning developers and power users into one-person engineering teams. This is a live, digital-only event.',
-      isOnline: true
+      description:
+        "Hands-on with the tool that's turning developers and power users into one-person engineering teams. This is a live, digital-only event.",
+      isOnline: true,
     },
     {
       id: '4',
@@ -61,8 +64,9 @@ export class EventsService {
       image: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800',
       frequency: 'Mensualmente',
       location: 'Bogotá, CO',
-      description: 'Aprende técnicas de oratoria para mejorar tu comunicación en entornos empresariales. Taller práctico con ejercicios en vivo.',
-      isOnline: false
+      description:
+        'Aprende técnicas de oratoria para mejorar tu comunicación en entornos empresariales. Taller práctico con ejercicios en vivo.',
+      isOnline: false,
     },
     {
       id: '5',
@@ -76,8 +80,9 @@ export class EventsService {
       image: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?w=800',
       frequency: 'Mensualmente',
       location: 'Bogotá, CO',
-      description: 'Join us for our spring small business roundtable where entrepreneurs share insights, challenges and opportunities.',
-      isOnline: false
+      description:
+        'Join us for our spring small business roundtable where entrepreneurs share insights, challenges and opportunities.',
+      isOnline: false,
     },
     {
       id: '6',
@@ -91,9 +96,10 @@ export class EventsService {
       image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800',
       frequency: 'Mensualmente',
       location: 'Bogotá, CO',
-      description: 'El meetup mensual de desarrolladores de Bogotá. Charlas técnicas, networking y mucho más.',
-      isOnline: false
-    }
+      description:
+        'El meetup mensual de desarrolladores de Bogotá. Charlas técnicas, networking y mucho más.',
+      isOnline: false,
+    },
   ];
 
   // Signals
@@ -102,15 +108,17 @@ export class EventsService {
   userEvents = signal<Event[]>(this.mockEvents.slice(0, 2));
   userGroups = signal<string[]>([
     '🧜‍♀️ The AI Collective Hampton Roads',
-    'Suwanee Duluth Lawrenceville Fitness'
+    'Suwanee Duluth Lawrenceville Fitness',
+    'The codisy mantra',
+    'La Comunidad de Desarrolladores de Bogotá',
   ]);
 
   getEventById(id: string): Event | undefined {
-    return this.mockEvents.find(e => e.id === id);
+    return this.mockEvents.find((e) => e.id === id);
   }
 
   getSimilarEvents(id: string): Event[] {
-    return this.mockEvents.filter(e => e.id !== id).slice(0, 2);
+    return this.mockEvents.filter((e) => e.id !== id).slice(0, 2);
   }
 
   formatPrice(price: number | 'Free'): string {

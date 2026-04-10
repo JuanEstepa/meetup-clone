@@ -1,0 +1,54 @@
+<div class="relative">
+
+  <!-- Scroll content -->
+  <div
+    #scrollEl
+    class="flex gap-4 overflow-x-auto pb-2"
+    style="
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      scroll-behavior: smooth;
+    "
+  >
+    <ng-content />
+  </div>
+
+  <!-- Degradado izquierdo -->
+  <div
+    class="absolute top-0 left-0 bottom-2 w-20 pointer-events-none transition-opacity duration-300 z-10"
+    style="background: linear-gradient(to right, #fafafa 30%, transparent 100%);"
+    [style.opacity]="showLeft ? '1' : '0'"
+  ></div>
+
+  <!-- Degradado derecho -->
+  <div
+    class="absolute top-0 right-0 bottom-2 w-20 pointer-events-none transition-opacity duration-300 z-10"
+    style="background: linear-gradient(to left, #fafafa 30%, transparent 100%);"
+    [style.opacity]="showRight ? '1' : '0'"
+  ></div>
+
+  <!-- Botón izquierda -->
+  <button
+    class="absolute left-1 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-[#232326] text-white
+           flex items-center justify-center shadow-lg hover:bg-gray-700 active:scale-95
+           transition-all duration-200 z-20"
+    [style.opacity]="showLeft ? '1' : '0'"
+    [style.pointerEvents]="showLeft ? 'auto' : 'none'"
+    (click)="scrollLeft()"
+  >
+    <i class="pi pi-angle-left text-base"></i>
+  </button>
+
+  <!-- Botón derecha -->
+  <button
+    class="absolute right-1 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-[#232326] text-white
+           flex items-center justify-center shadow-lg hover:bg-gray-700 active:scale-95
+           transition-all duration-200 z-20"
+    [style.opacity]="showRight ? '1' : '0'"
+    [style.pointerEvents]="showRight ? 'auto' : 'none'"
+    (click)="scrollRight()"
+  >
+    <i class="pi pi-angle-right text-base"></i>
+  </button>
+
+</div>

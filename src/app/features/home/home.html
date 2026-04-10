@@ -174,22 +174,38 @@
     <span class="md:ml-1">categorías principales</span>
   </h2>
 
-  <div class="relative">
-    @if (showScrollLeft) {
-      <button
-        class="hidden md:flex absolute -left-5 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-[#232326] text-white items-center justify-center shadow-lg hover:bg-gray-700 transition-colors z-20"
-        (click)="scrollLeft()"
-      >
-        <i class="pi pi-angle-left text-lg"></i>
-      </button>
+  <!-- Mobile: grid 2 columnas -->
+  <div class="grid grid-cols-2 gap-4 md:hidden">
+    @for (cat of categories; track cat.name) {
+      <div class="relative group cursor-pointer" style="height: 120px">
+        <!-- Card atrás -->
+        <div
+          class="absolute inset-0 rounded-2xl translate-y-2"
+          [style.background]="cat.border"
+        ></div>
+        <!-- Card principal -->
+        <div
+          class="absolute inset-0 bg-white rounded-2xl border-2 overflow-hidden"
+          [style.borderColor]="cat.border"
+        >
+          <span
+            class="absolute top-3 left-4 font-black text-[#232326] text-xs leading-tight w-20 z-10"
+          >
+            {{ cat.name }}
+          </span>
+          <img
+            [src]="cat.image"
+            [alt]="cat.name"
+            class="absolute -bottom-1 -right-1 w-16 h-16 object-contain"
+          />
+        </div>
+      </div>
     }
+  </div>
 
-    <div
-      #categoriesScroll
-      class="flex gap-6 overflow-x-auto pb-6 pt-2 px-2 scroll-smooth"
-      style="scrollbar-width: none; -ms-overflow-style: none"
-      (scroll)="updateScrollButtons()"
-    >
+  <!-- Desktop: scroll horizontal -->
+  <div class="hidden md:block">
+    <app-scroll-container>
       @for (cat of categories; track cat.name) {
         <div
           class="relative flex-shrink-0 group cursor-pointer"
@@ -199,7 +215,6 @@
             class="absolute inset-0 rounded-[32px] translate-y-2 transition-transform duration-300 group-hover:translate-y-3"
             [style.background]="cat.border"
           ></div>
-
           <div
             class="absolute inset-0 bg-white rounded-[32px] border-2 shadow-sm transition-transform duration-300 group-hover:-translate-y-1 overflow-hidden"
             [style.borderColor]="cat.border"
@@ -209,7 +224,6 @@
             >
               {{ cat.name }}
             </span>
-
             <img
               [src]="cat.image"
               [alt]="cat.name"
@@ -218,16 +232,7 @@
           </div>
         </div>
       }
-    </div>
-
-    @if (showScrollRight) {
-      <button
-        class="hidden md:flex absolute -right-5 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-[#232326] text-white items-center justify-center shadow-lg hover:bg-gray-700 transition-colors z-20"
-        (click)="scrollRight()"
-      >
-        <i class="pi pi-angle-right text-lg"></i>
-      </button>
-    }
+    </app-scroll-container>
   </div>
 </section>
 
@@ -278,7 +283,6 @@
 
   <!-- Desktop: 2 columnas con línea curva -->
   <div class="hidden md:block relative">
-
     <div class="grid grid-cols-2 gap-12">
       <!-- Artículo 1 -->
       <div class="flex flex-col items-center text-center">

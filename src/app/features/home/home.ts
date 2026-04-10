@@ -3,16 +3,16 @@ import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { EventCard } from '../../shared/components/event-card/event-card';
 import { EventsService } from '../../core/services/events.service';
+import { ScrollContainer } from '../../shared/components/scroll-container/scroll-container';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterLink, EventCard],
+  imports: [CommonModule, RouterLink, EventCard, ScrollContainer],
   templateUrl: './home.html',
 })
 export class Home {
   eventsService = inject(EventsService);
-
   @ViewChild('categoriesScroll') categoriesScroll!: ElementRef;
 
   showScrollLeft = false;

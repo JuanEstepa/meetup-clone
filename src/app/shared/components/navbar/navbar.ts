@@ -17,6 +17,8 @@ export class Navbar {
   router = inject(Router);
   authModalService = inject(AuthModalService);
 
+  showDropdown = false;
+
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/']);
@@ -24,5 +26,13 @@ export class Navbar {
 
   goToDashboard(): void {
     this.router.navigate(['/dashboard']);
+  }
+
+  toggleDropdown(): void {
+    this.showDropdown = !this.showDropdown;
+  }
+
+  closeDropdown(): void {
+    this.showDropdown = false;
   }
 }
