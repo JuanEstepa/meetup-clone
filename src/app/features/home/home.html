@@ -39,9 +39,10 @@
 
         <!-- CTA -->
         <a
-          routerLink="/login"
-          class="bg-[#232326] text-white font-semibold text-base px-8 rounded-full flex items-center justify-center transition-colors hover:bg-gray-800"
+          
+          class="bg-[#232326] text-white font-semibold text-base px-8 rounded-full flex items-center justify-center hover:bg-gray-800 hover:cursor-pointer hover:scale-105 transition-all duration-300"
           style="min-height: 48px"
+          (click)="authModalService.openLogin()"
         >
           Unirse a meetup
         </a>
@@ -52,7 +53,7 @@
         <img
           src="images/hero.webp"
           alt="Personas en Meetup"
-          class="w-full max-w-[520px] object-contain"
+          class="w-full object-contain"
         />
       </div>
     </div>
@@ -106,7 +107,7 @@
         confort y perseguir intereses juntos. Es gratuito.
       </p>
       <a
-        routerLink="/login"
+        (click)="authModalService.openLogin()"
         class="bg-[#232326] text-white font-bold px-8 rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors"
         style="min-height: 48px"
       >
@@ -141,8 +142,8 @@
             de confort y perseguir intereses juntos. Es gratuito.
           </p>
           <a
-            routerLink="/login"
-            class="bg-[#232326] text-white font-bold px-10 rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors"
+            (click)="authModalService.openLogin()"
+            class="bg-[#232326] text-white font-bold px-10 rounded-full flex items-center justify-center hover:bg-gray-800 hover:cursor-pointer hover:scale-105 transition-all duration-300"
             style="min-height: 48px"
           >
             Registrarte gratis

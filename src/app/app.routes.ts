@@ -1,9 +1,10 @@
 import { Routes } from '@angular/router';
-import { authGuard } from './core/guards/auth-guard';
+import { authGuard, redirectGuard} from './core/guards/auth-guard';
 
 export const routes: Routes = [
   {
     path: '',
+    canActivate: [redirectGuard],
     loadComponent: () =>
       import('./features/home/home')
         .then(m => m.Home)
@@ -13,12 +14,6 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/event-detail/event-detail')
         .then(m => m.EventDetail)
-  },
-  {
-    path: 'login',
-    loadComponent: () =>
-      import('./features/auth/login/login')
-        .then(m => m.Login)
   },
   {
     path: 'dashboard',
